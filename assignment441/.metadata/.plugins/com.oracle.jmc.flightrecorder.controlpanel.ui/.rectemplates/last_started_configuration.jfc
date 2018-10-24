@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration version="1.0" name="Settings for &apos;My Recording&apos;" description="These settings were used to start the recording &apos;/Users/chynnaevans/flight_recording_180121qutSequential21571_1.jfr&apos;." provider="Oracle">
+
+  <producer uri="http://www.oracle.com/hotspot/jvm/" label="Oracle JDK">
+
+    <control>
+
+      <selection name="gc-level" default="detailed" label="Garbage Collector">
+        <option label="Off" name="off">off</option>
+        <option label="Normal" name="detailed">normal</option>
+        <option label="All" name="all">all</option>
+      </selection>
+
+      <condition name="gc-enabled-normal" true="true" false="false">
+        <or>
+          <test name="gc-level" operator="equal" value="normal"/>
+          <test name="gc-level" operator="equal" value="all"/>
+        </or>
+      </condition>
+
+      <condition name="gc-enabled-all" true="true" false="false">
+        <test name="gc-level" operator="equal" value="all"/>
+      </condition>
+
+      <selection name="compiler-level" default="detailed" label="Compiler">
+        <option label="Off" name="off">off</option>
+        <option label="Normal" name="normal">normal</option>
+        <option label="Detailed" name="detailed">detailed</option>
+        <option label="All" name="all">all</option>
+      </selection>
+
+      <condition name="compiler-enabled" true="false" false="true">
+        <test name="compiler-level" operator="equal" value="off"/>
+      </condition>
+
+      <condition name="compiler-enabled-failure" true="true" false="false">
+        <or>
+          <test name="compiler-level" operator="equal" value="detailed"/>
+          <test name="compiler-level" operator="equal" value="all"/>
+        </or>
+      </condition>
+
+      <condition name="compiler-sweeper-threshold" true="0 ms" false="100 ms">
+        <test name="compiler-level" operator="equal" value="all"/>
+      </condition>
+
+      <condition name="compiler-compilation-threshold" true="1000 ms">
+        <test name="compiler-level" operator="equal" value="normal"/>
+      </condition>
+
+      <condition name="compiler-compilation-threshold" true="100 ms">
+        <test name="compiler-level" operator="equal" value="detailed"/>
+      </condition>
+
+      <condition name="compiler-compilation-threshold" true="0 ms">
+        <test name="compiler-level" operator="equal" value="all"/>
+      </condition>
+
+      <condition name="compiler-phase-threshold" true="60 s">
+        <test name="compiler-level" operator="equal" value="normal"/>
+      </condition>
+
+      <condition name="compiler-phase-threshold" true="10 s">
+        <test name="compiler-level" operator="equal" value="detailed"/>
+      </condition>
+
+      <condition name="compiler-phase-threshold" true="0 s">
+        <test name="compiler-level" operator="equal" value="all"/>
+      </condition>
+
+      <selection name="method-sampling-interval" default="maximum" label="Method Sampling">
+        <option label="Off" name="off">999 d</option>
+        <option label="Normal" name="normal">20 ms</option>
+        <option label="Maximum" name="maximum">10 ms</option>
+      </selection>
+
+      <condition name="method-sampling-enabled" true="false" false="true">
+        <test name="method-sampling-interval" operator="equal" value="999 d"/>
+      </condition>
+
+      <selection name="thread-dump-interval" default="everyMinute" label="Thread Dump">
+        <option label="Off" name="off">999 d</option>
+        <option label="At least Once" name="normal">everyChunk</option>
+        <option label="Every 60 s" name="everyMinute">60 s</option>
+        <option label="Every 10 s" name="everyTenSecond">10 s</option>
+        <option label="Every 1 s" name="everySecond">1 s</option>
+      </selection>
+
+      <condition name="thread-dump-enabled" true="false" false="true">
+        <test name="thread-dump-interval" operator="equal" value="999 d"/>
+      </condition>
+
+      <selection name="exception-level" default="errors" label="Exceptions">
+        <option label="Off" name="off">off</option>
+        <option label="Errors Only" name="errors">errors</option>
+        <option label="All Exceptions, including Errors" name="all">all</option>
+      </selection>
+
+      <condition name="enable-errors" true="true" false="false">
+        <or>
+          <test name="exception-level" operator="equal" value="errors"/>
+          <test name="exception-level" operator="equal" value="all"/>
+        </or>
+      </condition>
+
+      <condition name="enable-exceptions" true="true" false="false">
+        <test name="exception-level" operator="equal" value="all"/>
+      </condition>
+
+      <text name="synchronization-threshold" label="Synchronization Threshold" contentType="timespan" minimum="0 s">10 ms</text>
+
+      <text name="file-io-threshold" label="File I/O Threshold" contentType="timespan" minimum="0 s">10 ms</text>
+
+      <text name="socket-io-threshold" label="Socket I/O Threshold" contentType="timespan" minimum="0 s">10 ms</text>
+
+      <flag name="heap-statistics-enabled" label="Heap Statistics">true</flag>
+
+      <flag name="class-loading-enabled" label="Class Loading">true</flag>
+
+      <flag name="allocation-profiling-enabled" label="Allocation Profiling">true</flag>
+
+    </control>
+
+    <event path="java/statistics/thread_allocation" label="Thread Allocation Statistics" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="java/statistics/class_loading" label="Class Loading Statistics" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">1000 ms</setting>
+    </event>
+
+    <event path="java/statistics/threads" label="Java Thread Statistics" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">1000 ms</setting>
+    </event>
+
+    <event path="java/thread_start" label="Java Thread Start" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="java/thread_end" label="Java Thread End" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="java/thread_sleep" label="Java Thread Sleep" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="stackTrace" label="Stack Trace" description="Whether or not to include stack traces in the events." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" control="synchronization-threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">10 ms</setting>
+    </event>
+
+    <event path="java/thread_park" label="Java Thread Park" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="stackTrace" label="Stack Trace" description="Whether or not to include stack traces in the events." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" control="synchronization-threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">10 ms</setting>
+    </event>
+
+    <event path="java/monitor_enter" label="Java Monitor Blocked" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="stackTrace" label="Stack Trace" description="Whether or not to include stack traces in the events." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" control="synchronization-threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">10 ms</setting>
+    </event>
+
+    <event path="java/monitor_wait" label="Java Monitor Wait" description="Waiting on a Java monitor">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="stackTrace" label="Stack Trace" description="Whether or not to include stack traces in the events." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" control="synchronization-threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">10 ms</setting>
+    </event>
+
+    <event path="vm/class/load" label="Class Load" description="">
+      <setting name="enabled" control="class-loading-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="stackTrace" label="Stack Trace" description="Whether or not to include stack traces in the events." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">0 ms</setting>
+    </event>
+
+    <event path="vm/class/unload" label="Class Unload" description="">
+      <setting name="enabled" control="class-loading-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/info" label="JVM Information" description="Description of JVM and the Java application">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/initial_system_property" label="Initial System Property" description="System Property at JVM start.">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/prof/execution_sample" label="Method Profiling Sample" description="Snapshot of a threads state">
+      <setting name="enabled" control="method-sampling-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" control="method-sampling-interval" label="Period" description="The request period.">10 ms</setting>
+    </event>
+
+    <event path="vm/prof/execution_sampling_info" label="Method Sampling Information" description="Information about a specific execution sampling">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">false</setting>
+      <setting name="threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">1 ms</setting>
+    </event>
+
+    <event path="vm/runtime/execute_vm_operation" label="VM Operation" description="Execution of a VM Operation">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">10 ms</setting>
+    </event>
+
+    <event path="vm/runtime/thread_dump" label="Thread Dump" description="">
+      <setting name="enabled" control="thread-dump-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" control="thread-dump-interval" label="Period" description="The request period.">60 s</setting>
+    </event>
+
+    <event path="vm/flag/long" label="Long Flag" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/flag/ulong" label="Unsigned Long Flag" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/flag/double" label="Double Flag" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/flag/boolean" label="Boolean Flag" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/flag/string" label="String Flag" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/flag/long_changed" label="Long Flag Changed" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/flag/ulong_changed" label="Unsigned Long Flag Changed" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/flag/double_changed" label="Double Flag Changed" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/flag/boolean_changed" label="Boolean Flag Changed" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/flag/string_changed" label="String Flag Changed" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/gc/detailed/object_count" label="Object Count" description="">
+      <setting name="enabled" control="heap-statistics-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/gc/configuration/gc" label="GC Configuration" description="The configuration of the garbage collector">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/gc/configuration/heap" label="GC Heap Configuration" description="The configuration of the garbage collected heap">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/gc/configuration/young_generation" label="GC Young Generation Configuration" description="The configuration of the young generation of the garbage collected heap">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/gc/configuration/tlab" label="GC TLAB Configuration" description="The configuration of the Tread Local Allocation Buffers (TLABs)">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/gc/configuration/survivor" label="GC Survivor Configuration" description="The configuration of the survivors of garbage collection">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/gc/detailed/object_count_after_gc" label="Object Count after GC" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">false</setting>
+    </event>
+
+    <event path="vm/gc/heap/summary" label="Heap Summary" description="">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/gc/heap/ps_summary" label="Parallel Scavenge Heap Summary" description="">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/gc/heap/metaspace_summary" label="Metaspace Summary" description="">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/gc/metaspace/gc_threshold" label="Metaspace GC Threshold" description="">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/gc/metaspace/allocation_failure" label="Metaspace Allocation Failure" description="">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="stackTrace" label="Stack Trace" description="Whether or not to include stack traces in the events." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/gc/metaspace/out_of_memory" label="Metaspace Out of Memory" description="">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="stackTrace" label="Stack Trace" description="Whether or not to include stack traces in the events." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/gc/metaspace/chunk_free_list_summary" label="Metaspace Chunk Free List Summary" description="">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/gc/collector/garbage_collection" label="Garbage Collection" description="Garbage collection performed by the JVM">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">0 ms</setting>
+    </event>
+
+    <event path="vm/gc/collector/parold_garbage_collection" label="Parallel Old Garbage Collection" description="Extra information specific to Parallel Old Garbage Collections">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">0 ms</setting>
+    </event>
+
+    <event path="vm/gc/collector/young_garbage_collection" label="Young Garbage Collection" description="Extra information specific to Young Garbage Collections">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">0 ms</setting>
+    </event>
+
+    <event path="vm/gc/collector/old_garbage_collection" label="Old Garbage Collection" description="Extra information specific to Old Garbage Collections">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">0 ms</setting>
+    </event>
+
+    <event path="vm/gc/collector/g1_garbage_collection" label="G1 Garbage Collection" description="Extra information specific to G1 Garbage Collections">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">0 ms</setting>
+    </event>
+
+    <event path="vm/gc/phases/pause" label="GC Phase Pause" description="">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">0 ms</setting>
+    </event>
+
+    <event path="vm/gc/phases/pause_level_1" label="GC Phase Pause Level 1" description="">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">0 ms</setting>
+    </event>
+
+    <event path="vm/gc/phases/pause_level_2" label="GC Phase Pause Level 2" description="">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">0 ms</setting>
+    </event>
+
+    <event path="vm/gc/phases/pause_level_3" label="GC Phase Pause Level 3" description="">
+      <setting name="enabled" control="gc-enabled-all" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">false</setting>
+      <setting name="threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">0 ms</setting>
+    </event>
+
+    <event path="vm/gc/reference/statistics" label="GC Reference Statistics" description="Total count of processed references during GC">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/gc/detailed/promotion_failed" label="Promotion Failed" description="Promotion of an object failed">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/gc/detailed/evacuation_failed" label="Evacuation Failed" description="Evacuation of an object failed">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/gc/detailed/evacuation_info" label="Evacuation Information" description="">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/gc/detailed/concurrent_mode_failure" label="Concurrent Mode Failure" description="Concurrent Mode failed">
+      <setting name="enabled" control="gc-enabled-normal" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/gc/detailed/allocation_requiring_gc" label="Allocation Requiring GC" description="">
+      <setting name="enabled" control="gc-enabled-all" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">false</setting>
+      <setting name="stackTrace" label="Stack Trace" description="Whether or not to include stack traces in the events." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/compiler/config" label="Compiler Configuration" description="">
+      <setting name="enabled" control="compiler-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/compiler/stats" label="Compiler Statistics" description="">
+      <setting name="enabled" control="compiler-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">1000 ms</setting>
+    </event>
+
+    <event path="vm/compiler/compilation" label="Compilation" description="">
+      <setting name="enabled" control="compiler-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" control="compiler-compilation-threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">100 ms</setting>
+    </event>
+
+    <event path="vm/compiler/phase" label="Compiler Phase" description="">
+      <setting name="enabled" control="compiler-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" control="compiler-phase-threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">10 s</setting>
+    </event>
+
+    <event path="vm/compiler/failure" label="Compilation Failure" description="">
+      <setting name="enabled" control="compiler-enabled-failure" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="vm/code_sweeper/config" label="Code Sweeper Configuration" description="">
+      <setting name="enabled" control="compiler-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/code_sweeper/stats" label="Code Sweeper Statistics" description="">
+      <setting name="enabled" control="compiler-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/code_sweeper/sweep" label="Sweep Code Cache" description="">
+      <setting name="enabled" control="compiler-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" control="compiler-sweeper-threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">100 ms</setting>
+    </event>
+
+    <event path="vm/code_cache/config" label="Code Cache Configuration" description="">
+      <setting name="enabled" control="compiler-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/code_cache/stats" label="Code Cache Statistics" description="">
+      <setting name="enabled" control="compiler-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="vm/code_cache/full" label="Code Cache Full" description="">
+      <setting name="enabled" control="compiler-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="os/information" label="OS Information" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="os/processor/cpu_information" label="CPU Information" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="os/processor/context_switch_rate" label="Thread Context Switch Rate" description="">
+      <setting name="enabled" control="compiler-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">10 s</setting>
+    </event>
+
+    <event path="os/processor/cpu_load" label="CPU Load" description="OS CPU Load">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">1000 ms</setting>
+    </event>
+
+    <event path="os/processor/cpu_tsc" label="CPU Time Stamp Counter" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="os/system_process" label="System Process" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="os/initial_environment_variable" label="Initial Environment Variable" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="os/memory/physical_memory" label="Physical Memory" description="OS Physical Memory">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">everyChunk</setting>
+    </event>
+
+    <event path="java/object_alloc_in_new_TLAB" label="Allocation in new TLAB" description="Allocation in new Thread Local Allocation Buffer">
+      <setting name="enabled" control="allocation-profiling-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="stackTrace" label="Stack Trace" description="Whether or not to include stack traces in the events." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="java/object_alloc_outside_TLAB" label="Allocation outside TLAB" description="Allocation outside Thread Local Allocation Buffers">
+      <setting name="enabled" control="allocation-profiling-enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="stackTrace" label="Stack Trace" description="Whether or not to include stack traces in the events." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+  </producer>
+
+  <producer uri="http://www.oracle.com/hotspot/jdk/" label="Oracle JDK">
+
+    <event path="java/file_read" label="File Read" description="Reading data from a file">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="stackTrace" label="Stack Trace" description="Whether or not to include stack traces in the events." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" control="http://www.oracle.com/hotspot/jvm/file-io-threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">10 ms</setting>
+    </event>
+
+    <event path="java/file_write" label="File Write" description="Writing data to a file">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="stackTrace" label="Stack Trace" description="Whether or not to include stack traces in the events." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" control="http://www.oracle.com/hotspot/jvm/file-io-threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">10 ms</setting>
+    </event>
+
+    <event path="java/socket_read" label="Socket Read" description="Reading data from a socket">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="stackTrace" label="Stack Trace" description="Whether or not to include stack traces in the events." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" control="http://www.oracle.com/hotspot/jvm/socket-io-threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">10 ms</setting>
+    </event>
+
+    <event path="java/socket_write" label="Socket Write" description="Writing data to a socket">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="stackTrace" label="Stack Trace" description="Whether or not to include stack traces in the events." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="threshold" control="http://www.oracle.com/hotspot/jvm/socket-io-threshold" label="Threshold" description="Only include events with at least this duration." contentType="jdk.jfr.Timespan">10 ms</setting>
+    </event>
+
+    <event path="java/exception_throw" label="Java Exception" description="An object derived from java.lang.Exception has been created">
+      <setting name="enabled" control="http://www.oracle.com/hotspot/jvm/enable-exceptions" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">false</setting>
+      <setting name="stackTrace" label="Stack Trace" description="Whether or not to include stack traces in the events." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="java/error_throw" label="Java Error" description="An object derived from java.lang.Error has been created. OutOfMemoryErrors are ignored.">
+      <setting name="enabled" control="http://www.oracle.com/hotspot/jvm/enable-errors" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="stackTrace" label="Stack Trace" description="Whether or not to include stack traces in the events." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="java/statistics/throwables" label="Exception Statistics" description="Number of objects derived from java.lang.Throwable that have been created">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+      <setting name="period" label="Period" description="The request period.">1000 ms</setting>
+    </event>
+
+  </producer>
+
+  <producer uri="http://www.oracle.com/hotspot/jfr-info/" label="Oracle JDK">
+
+    <event path="recordings/recording" label="Flight Recording" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+    <event path="recordings/recording_setting" label="Recording Setting" description="">
+      <setting name="enabled" label="Enabled" description="Whether or not events of this type will be included." contentType="jdk.jfr.Flag">true</setting>
+    </event>
+
+  </producer>
+
+</configuration>

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+COUNTER=0
+
+while [	$COUNTER -lt 5	]; do
+	java -XX:+UnlockCommercialFeatures -XX:+FlightRecorder -XX:StartFlightRecording=duration=500s,filename=$1_thread_recording$COUNTER.jfr -jar $1Thread.jar
+	echo $COUNTER
+	let COUNTER=$COUNTER+1
+	done
+	 #!/bin/bash 
+        # COUNTER=0
+        # while [  $COUNTER -lt 10 ]; do
+         #    echo The counter is $COUNTER
+          #   let COUNTER=COUNTER+1 
+         #done

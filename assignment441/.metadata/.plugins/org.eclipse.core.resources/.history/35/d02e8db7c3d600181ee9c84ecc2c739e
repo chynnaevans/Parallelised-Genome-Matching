@@ -1,0 +1,34 @@
+package qut;
+
+import edu.au.jacobi.pattern.Match;
+import edu.au.jacobi.pattern.Series;
+import edu.au.jacobi.sequence.Sequence;
+import edu.au.jacobi.sequence.list.FeatureList;
+import java.util.Comparator;
+import java.util.stream.IntStream;
+
+public class BioPatterns 
+{
+    public static Match getBestMatch(Series pattern, String inputString)
+    {
+        return new Sequence("DNA",inputString).searchBest(1, 1, pattern);
+    }	        
+}
+
+
+ForkJoinPool threadPool = new ForkJoinPool(NUM_THREADS);
+int chunkSize = aList.size()/NUM_THREADS;
+
+for(String file : fileList){
+    for(String item : xList){
+    IntStream.range(0,  NUM_THREADS)
+        .parallel().forEach(i -> threadPool.submit(() -> {
+
+          aList.subList(i*chunkSize, Math.min(i*chunkSize + chunkSize -1, aList.size()-1))
+               .forEach(x -> {
+	                  //action code
+                });
+          }).invoke());
+    	
+    }
+}
